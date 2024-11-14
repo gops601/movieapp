@@ -14,7 +14,24 @@ jobs:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+    jobs:
+  build:
+    runs-on: ubuntu-latest
+
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # specify the Node version as needed
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the application
+        run: npm run build
       - uses: actions/checkout@v3
         with:
           submodules: true
