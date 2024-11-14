@@ -14,7 +14,7 @@ jobs:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
-    jobs:
+    
   build:
     runs-on: ubuntu-latest
 
@@ -32,6 +32,13 @@ jobs:
 
       - name: Build the application
         run: npm run build
+        
+      - name: List build directory
+        run: ls -la build
+        
+      - name: List dist directory
+        run: ls -la dist
+
       - uses: actions/checkout@v3
         with:
           submodules: true
